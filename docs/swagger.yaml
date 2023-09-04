@@ -1,0 +1,64 @@
+swagger: "2.0"
+info:
+  title: Letters parser API
+  description: Docs for Letters parser API
+  version: 1.0.0
+schemes:
+  - http
+host: 127.0.0.1:31080
+basePath: /api
+
+paths:
+
+  /v1/collections:
+    post:
+      tags:
+        - collections
+      summary: Create collection
+      description: Create collection of letters
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: "CreateCollectionRequestBody"
+          in: body
+          description: "Request body for creation of collection"
+          required: true
+          schema:
+            $ref: "#/definitions/CreateCollectionRequestModel"
+      responses:
+        200:
+          description: "Successfull operation"
+          schema:
+            $ref: "#/definitions/DefaultSuccessResponseModel"
+        422:
+          description: "Validation error"
+          schema:
+            $ref: "#/definitions/ValidationErrorResponseModel"
+
+definitions:
+
+  # Create collection
+  CreateCollectionRequestModel:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+
+  # Common
+  DefaultSuccessResponseModel:
+    type: object
+    properties:
+      success:
+        type: boolean
+      message:
+        type: string
+
+  ValidationErrorResponseModel:
+    type: object
+    properties:
+      errors:
+        type: object
