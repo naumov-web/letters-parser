@@ -11,6 +11,46 @@ basePath: /api
 paths:
 
   /v1/collections:
+    get:
+      tags:
+        - collections
+      summary: Get collections
+      description: Get list of collections
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: limit
+          type: integer
+          description: Limit of items in response
+        - in: query
+          name: offset
+          type: integer
+          description: Offset of items in response
+        - in: query
+          name: sortBy
+          type: string
+          description: Sort by column
+          enum:
+            - id
+            - name
+            - createdAt
+        - in: query
+          name: sortDirection
+          type: string
+          description: Sort direction
+          enum:
+            - asc
+            - desc
+      responses:
+        200:
+          description: "Successfull operation"
+          schema:
+            $ref: "#/definitions/GetCollectionsResponseModel"
+        422:
+          description: "Validation error"
+          schema:
+            $ref: "#/definitions/ValidationErrorResponseModel"
     post:
       tags:
         - collections
@@ -38,6 +78,29 @@ paths:
             $ref: "#/definitions/ValidationErrorResponseModel"
 
 definitions:
+
+  # Get collections
+  GetCollectionsResponseModel:
+    type: object
+    properties:
+      success:
+        type: boolean
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/CollectionResponseModel"
+      count:
+        type: integer
+
+  CollectionResponseModel:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      createdAt:
+        type: string
 
   # Create collection
   CreateCollectionRequestModel:
