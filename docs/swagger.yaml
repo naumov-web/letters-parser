@@ -99,8 +99,6 @@ definitions:
         type: integer
       name:
         type: string
-      createdAt:
-        type: string
 
   # Create collection
   CreateCollectionRequestModel:

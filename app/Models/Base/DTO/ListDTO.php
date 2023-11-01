@@ -11,14 +11,10 @@ use Illuminate\Support\Collection;
 final class ListDTO
 {
     /**
-     * Items collection
-     * @var Collection
+     * List DTO constructor
+     *
+     * @param Collection $items
+     * @param int $count
      */
-    public Collection $items;
-
-    /**
-     * Total count value
-     * @var int
-     */
-    public int $count;
+    public function __construct(public Collection $items, public int $count) {}
 }

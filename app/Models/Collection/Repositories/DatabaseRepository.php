@@ -2,6 +2,8 @@
 
 namespace App\Models\Collection\Repositories;
 
+use App\Models\Base\DTO\IndexDTO;
+use App\Models\Base\DTO\ListDTO;
 use App\Models\Base\Repositories\BaseDatabaseRepository;
 use App\Models\Collection\Composers\CollectionDTOComposer;
 use App\Models\Collection\Contracts\IDatabaseRepository;
@@ -58,5 +60,23 @@ final class DatabaseRepository extends BaseDatabaseRepository implements IDataba
         }
 
         return $this->composer->getFromModel($model);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function index(IndexDTO $dto): ListDTO
+    {
+        $query = $this->getQuery();
+        $query = $this->applyPaginationAndSorting(
+            $query,
+            $dto
+        );
+        $count = $query->count();
+
+        return new ListDTO(
+            $this->composer->getFromCollection($query->get()),
+            $count
+        );
     }
 }
