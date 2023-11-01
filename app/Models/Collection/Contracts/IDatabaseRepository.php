@@ -2,6 +2,8 @@
 
 namespace App\Models\Collection\Contracts;
 
+use App\Models\Base\DTO\IndexDTO;
+use App\Models\Base\DTO\ListDTO;
 use App\Models\Collection\DTO\CollectionDTO;
 
 /**
@@ -25,4 +27,12 @@ interface IDatabaseRepository
      * @return CollectionDTO
      */
     public function create(string $name): CollectionDTO;
+
+    /**
+     * Get collections list
+     *
+     * @param IndexDTO $dto
+     * @return ListDTO
+     */
+    public function index(IndexDTO $dto): ListDTO;
 }

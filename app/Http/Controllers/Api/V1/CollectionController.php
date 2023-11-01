@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\BaseApiController;
 use App\Http\Requests\Api\V1\Collection\CreateRequest;
+use App\Http\Requests\Api\V1\Collection\IndexRequest;
+use App\Http\Resources\Api\ListResource;
+use App\Http\Resources\Api\V1\Collection\CollectionResource;
 use App\Models\Collection\Exceptions\CollectionWithNameAlreadyExistsException;
 use App\UseCases\Base\Exceptions\UseCaseNotFoundException;
+use App\UseCases\Collection\GetCollectionsUseCase;
 use App\UseCases\Collection\InputDTO\CreateCollectionInputDTO;
+use App\UseCases\Collection\InputDTO\GetCollectionsInputDTO;
 use App\UseCases\UseCaseSystemNamesEnum;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\JsonResponse;
@@ -55,5 +60,35 @@ final class CollectionController extends BaseApiController
                 'message' => __('messages.collection_created_successfully')
             ]
         );
+    }
+
+    /**
+     * Handle request to get collections list
+     *
+     * @param IndexRequest $request
+     * @return ListResource
+     * @throws BindingResolutionException
+     * @throws UseCaseNotFoundException
+     */
+    public function index(IndexRequest $request): ListResource
+    {
+        $inputDto = new GetCollectionsInputDTO();
+        $inputDto->limit = $request->limit;
+        $inputDto->offset = $request->offset;
+        $inputDto->sortBy = $request->sortBy;
+        $inputDto->sortDirection = $request->sortDirection;
+
+        /** @var GetCollectionsUseCase $useCase */
+        $useCase = $this->useCaseFactory->createUseCase(UseCaseSystemNamesEnum::GET_COLLECTIONS);
+        $useCase->setInputDTO($inputDto);
+        $useCase->execute();
+
+        $listDto = $useCase->getListDto();
+
+        return (new ListResource(null))
+            ->setMessage(__('messages.collections_loaded_successfully'))
+            ->setResourceClassName(CollectionResource::class)
+            ->setItems($listDto->items)
+            ->setCount($listDto->count);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Resources\Api\BaseApiResource;
 use App\Models\Collection;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +29,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        BaseApiResource::withoutWrapping();
     }
 }
