@@ -19,4 +19,10 @@ final class UseCaseSystemNamesEnum
      * @var string
      */
     public const GET_COLLECTIONS = 'getCollections';
+
+    /**
+     * Use case "Update file storage settings"
+     * @var string
+     */
+    public const UPDATE_FILE_STORAGE_SETTINGS = 'updateFileStorageSettings';
 }
