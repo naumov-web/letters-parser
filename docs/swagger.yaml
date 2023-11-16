@@ -77,6 +77,33 @@ paths:
           schema:
             $ref: "#/definitions/ValidationErrorResponseModel"
 
+  /v1/file-storage/settings:
+    put:
+      tags:
+        - settings
+      summary: Update settings of file storage
+      description: Update settings of file storage
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: "UpdateFileStorageSettingsRequestBody"
+          in: body
+          description: "Request body for updating of file storage settings"
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateFileStorageSettingsRequestModel"
+      responses:
+        200:
+          description: "Successfull operation"
+          schema:
+            $ref: "#/definitions/DefaultSuccessResponseModel"
+        422:
+          description: "Validation error"
+          schema:
+            $ref: "#/definitions/ValidationErrorResponseModel"
+
 definitions:
 
   # Get collections
@@ -109,7 +136,31 @@ definitions:
       name:
         type: string
 
-  # Common
+  # Update file storage settings
+  UpdateFileStorageSettingsRequestModel:
+    type: object
+    required:
+      - key
+      - secret
+      - region
+      - bucket
+      - url
+      - endpoint
+    properties:
+      key:
+        type: string
+      secret:
+        type: string
+      region:
+        type: string
+      bucket:
+        type: string
+      url:
+        type: string
+      endpoint:
+        type: string
+
+      # Common
   DefaultSuccessResponseModel:
     type: object
     properties:
