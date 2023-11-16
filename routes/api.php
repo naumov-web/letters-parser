@@ -21,4 +21,9 @@ Route::prefix('/v1')
             Route::get('', 'CollectionController@index');
             Route::post('', 'CollectionController@create');
         });
+
+        Route::put(
+            '/file-storage/settings',
+            'FileStorageSettingsController@update'
+        );
     });

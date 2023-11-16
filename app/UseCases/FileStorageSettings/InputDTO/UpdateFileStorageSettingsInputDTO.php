@@ -8,7 +8,7 @@ use App\UseCases\Base\DTO\BaseUseCaseDTO;
  * Class UpdateFileStorageConfigurationInputDTO
  * @package App\UseCases\FileStorageConfiguration\InputDTO
  */
-final class UpdateFileStorageConfigurationInputDTO extends BaseUseCaseDTO
+final class UpdateFileStorageSettingsInputDTO extends BaseUseCaseDTO
 {
     /**
      * System name value

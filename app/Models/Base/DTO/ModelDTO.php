@@ -73,4 +73,22 @@ abstract class ModelDTO
             }
         }
     }
+
+    /**
+     * Convert object to
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $fields = $this->getFields();
+        $result = [];
+
+        foreach ($fields as $field) {
+            $snakeCaseName = $this->camelToSnake($field);
+            $result[$snakeCaseName] = $this->{$field};
+        }
+
+        return $result;
+    }
 }

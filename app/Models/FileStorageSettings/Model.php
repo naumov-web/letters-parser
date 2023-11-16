@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\FileStorageConfiguration;
+namespace App\Models\FileStorageSettings;
 
 use App\Models\Base\BaseDBModel;
 

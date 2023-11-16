@@ -1,18 +1,18 @@
 <?php
 
-namespace App\UseCases\FileStorageConfiguration;
+namespace App\UseCases\FileStorageSettings;
 
-use App\Models\FileStorageConfiguration\DTO\FileStorageConfigurationDTO;
-use App\Models\FileStorageConfiguration\Enums\DefaultsEnum;
-use App\Models\FileStorageConfiguration\Repositories\DatabaseRepository;
+use App\Models\FileStorageSettings\DTO\FileStorageSettingsDTO;
+use App\Models\FileStorageSettings\Enums\DefaultsEnum;
+use App\Models\FileStorageSettings\Repositories\DatabaseRepository;
 use App\UseCases\BaseUseCase;
-use App\UseCases\FileStorageConfiguration\InputDTO\UpdateFileStorageConfigurationInputDTO;
+use App\UseCases\FileStorageSettings\InputDTO\UpdateFileStorageSettingsInputDTO;
 
 /**
- * Class UpdateFileStorageConfigurationUseCase
+ * Class UpdateFileStorageSettingsUseCase
  * @package App\UseCases\FileStorageConfiguration
  */
-final class UpdateFileStorageConfigurationUseCase extends BaseUseCase
+final class UpdateFileStorageSettingsUseCase extends BaseUseCase
 {
     /**
      * UpdateFileStorageConfigurationUseCase constructor
@@ -25,7 +25,7 @@ final class UpdateFileStorageConfigurationUseCase extends BaseUseCase
      */
     protected function getInputDTOClass(): ?string
     {
-        return UpdateFileStorageConfigurationInputDTO::class;
+        return UpdateFileStorageSettingsInputDTO::class;
     }
 
     /**
@@ -33,10 +33,10 @@ final class UpdateFileStorageConfigurationUseCase extends BaseUseCase
      */
     public function execute(): void
     {
-        /** @var UpdateFileStorageConfigurationInputDTO $inputDto */
+        /** @var UpdateFileStorageSettingsInputDTO $inputDto */
         $inputDto = $this->inputDto;
-        $configurationDto = new FileStorageConfigurationDTO();
-        $configurationDto->systemName = DefaultsEnum::DEFAULT_CONFIG_SYSTEM_NAME;
+        $configurationDto = new FileStorageSettingsDTO();
+        $configurationDto->systemName = DefaultsEnum::DEFAULT_SYSTEM_NAME;
         $configurationDto->key = $inputDto->key;
         $configurationDto->secret = $inputDto->secret;
         $configurationDto->region = $inputDto->region;

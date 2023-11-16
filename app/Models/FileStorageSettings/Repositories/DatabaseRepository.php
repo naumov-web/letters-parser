@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\FileStorageConfiguration\Repositories;
+namespace App\Models\FileStorageSettings\Repositories;
 
 use App\Models\Base\Repositories\BaseDatabaseRepository;
-use App\Models\FileStorageConfiguration\Contracts\IDatabaseRepository;
-use App\Models\FileStorageConfiguration\DTO\FileStorageConfigurationDTO;
-use App\Models\FileStorageConfiguration\Model;
+use App\Models\FileStorageSettings\Contracts\IDatabaseRepository;
+use App\Models\FileStorageSettings\DTO\FileStorageSettingsDTO;
+use App\Models\FileStorageSettings\Model;
 
 /**
  * Class DatabaseRepository
@@ -25,7 +25,7 @@ final class DatabaseRepository extends BaseDatabaseRepository implements IDataba
     /**
      * @inheritDoc
      */
-    public function updateOrCreate(FileStorageConfigurationDTO $dto): void
+    public function updateOrCreate(FileStorageSettingsDTO $dto): void
     {
         $model = $this->getQuery()
             ->where('system_name', $dto->systemName)

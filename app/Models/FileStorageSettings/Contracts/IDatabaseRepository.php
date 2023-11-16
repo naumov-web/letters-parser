@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\FileStorageConfiguration\Contracts;
+namespace App\Models\FileStorageSettings\Contracts;
 
-use App\Models\FileStorageConfiguration\DTO\FileStorageConfigurationDTO;
+use App\Models\FileStorageSettings\DTO\FileStorageSettingsDTO;
 
 /**
  * Interface IDatabaseRepository
@@ -13,8 +13,8 @@ interface IDatabaseRepository
     /**
      * Update file storage configuration or create if doesn't exist
      *
-     * @param FileStorageConfigurationDTO $dto
+     * @param FileStorageSettingsDTO $dto
      * @return void
      */
-    public function updateOrCreate(FileStorageConfigurationDTO $dto): void;
+    public function updateOrCreate(FileStorageSettingsDTO $dto): void;
 }

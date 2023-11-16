@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\FileStorageConfiguration\Enums;
+namespace App\Models\FileStorageSettings\Enums;
 
 /**
  * Class DefaultsEnum

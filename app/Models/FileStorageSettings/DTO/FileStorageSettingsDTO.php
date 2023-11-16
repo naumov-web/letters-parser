@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\FileStorageConfiguration\DTO;
+namespace App\Models\FileStorageSettings\DTO;
 
 use App\Models\Base\DTO\ModelDTO;
 
@@ -8,7 +8,7 @@ use App\Models\Base\DTO\ModelDTO;
  * Class FileStorageConfigurationDTO
  * @package App\Models\FileStorageConfiguration\DTO
  */
-final class FileStorageConfigurationDTO extends ModelDTO
+final class FileStorageSettingsDTO extends ModelDTO
 {
     /**
      * System name value
