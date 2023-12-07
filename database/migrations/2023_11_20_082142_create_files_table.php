@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('file_storage_settings', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('system_name')->unique();
-            $table->string('key');
-            $table->string('secret');
-            $table->string('region');
-            $table->string('bucket');
-            $table->string('url');
-            $table->string('endpoint');
+            $table->morphs('owner');
+            $table->string('name');
+            $table->string('mime');
+            $table->string('path');
+            $table->unsignedBigInteger('semantic_type_id');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('file_storage_settings');
+        Schema::dropIfExists('files');
     }
 };

@@ -20,6 +20,10 @@ Route::prefix('/v1')
         Route::prefix('/collections')->group(function () {
             Route::get('', 'CollectionController@index');
             Route::post('', 'CollectionController@create');
+
+            Route::prefix('/{collectionId}/items')->group(function () {
+                Route::post('', 'CollectionItemController@create');
+            });
         });
 
         Route::put(

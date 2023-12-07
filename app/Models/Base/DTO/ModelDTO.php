@@ -85,6 +85,10 @@ abstract class ModelDTO
         $result = [];
 
         foreach ($fields as $field) {
+            if (!isset($this->{$field})) {
+                continue;
+            }
+
             $snakeCaseName = $this->camelToSnake($field);
             $result[$snakeCaseName] = $this->{$field};
         }

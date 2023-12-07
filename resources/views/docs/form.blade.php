@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Документация по Chats API</title>
+        <title>Документация по Letters parser API</title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/css/swagger/swagger-ui.css" >
         <style>
