@@ -21,8 +21,8 @@ final class UseCaseSystemNamesEnum
     public const GET_COLLECTIONS = 'getCollections';
 
     /**
-     * Use case "Update file storage settings"
+     * Use case "Create collection item"
      * @var string
      */
-    public const UPDATE_FILE_STORAGE_SETTINGS = 'updateFileStorageSettings';
+    public const CREATE_COLLECTION_ITEM = 'createCollectionItem';
 }
