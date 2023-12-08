@@ -136,7 +136,7 @@ paths:
           description: "Request body for creation of example for collection item"
           required: true
           schema:
-            $ref: "#/definitions/CreateFileRequestModel"
+            $ref: "#/definitions/CreateCollectionItemExampleRequestModel"
       responses:
         200:
           description: "Successfull operation"
@@ -193,6 +193,15 @@ definitions:
         type: string
       file:
         $ref: "#/definitions/CreateFileRequestModel"
+
+    # Create collection item example
+    CreateCollectionItemExampleRequestModel:
+      type: object
+      required:
+        - file
+      properties:
+        file:
+          $ref: "#/definitions/CreateFileRequestModel"
 
   # Common
   DefaultSuccessResponseModel:
