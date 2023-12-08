@@ -2,7 +2,10 @@
 
 namespace App\Models\CollectionItem\Repositories;
 
+use App\Models\Base\DTO\IndexDTO;
+use App\Models\Base\DTO\ListDTO;
 use App\Models\Base\Repositories\BaseDatabaseRepository;
+use App\Models\CollectionItem\Composers\CollectionItemDTOComposer;
 use App\Models\CollectionItem\Contracts\IDatabaseRepository;
 use App\Models\CollectionItem\DTO\CollectionItemDTO;
 use App\Models\CollectionItem\Model;
@@ -14,6 +17,11 @@ use Illuminate\Support\Arr;
  */
 final class DatabaseRepository extends BaseDatabaseRepository implements IDatabaseRepository
 {
+    /**
+     * DatabaseRepository constructor
+     * @param CollectionItemDTOComposer $composer
+     */
+    public function __construct(private CollectionItemDTOComposer $composer) {}
 
     /**
      * @inheritDoc
@@ -53,5 +61,24 @@ final class DatabaseRepository extends BaseDatabaseRepository implements IDataba
         $query->where('name', $name);
 
         return $query->exists();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function index(int $collectionId, IndexDTO $dto): ListDTO
+    {
+        $query = $this->getQuery();
+        $query->where('collection_id', $collectionId);
+        $query = $this->applyPaginationAndSorting(
+            $query,
+            $dto
+        );
+        $count = $query->count();
+
+        return new ListDTO(
+            $this->composer->getFromCollection($query->get()),
+            $count
+        );
     }
 }

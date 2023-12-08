@@ -78,6 +78,45 @@ paths:
             $ref: "#/definitions/ValidationErrorResponseModel"
 
   /v1/collections/{collectionId}/items:
+    get:
+      tags:
+        - collection items
+      summary: Get collection items
+      description: Get collection items for specific collection
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: limit
+          type: integer
+          description: Limit of items in response
+        - in: query
+          name: offset
+          type: integer
+          description: Offset of items in response
+        - in: query
+          name: sortBy
+          type: string
+          description: Sort by column
+          enum:
+            - id
+            - name
+        - in: query
+          name: sortDirection
+          type: string
+          description: Sort direction
+          enum:
+            - asc
+            - desc
+      responses:
+        200:
+          description: "Successfull operation"
+          schema:
+            $ref: "#/definitions/GetCollectionItemsResponseModel"
+        422:
+          description: "Validation error"
+          schema:
+            $ref: "#/definitions/ValidationErrorResponseModel"
     post:
       tags:
         - collection items
@@ -194,14 +233,37 @@ definitions:
       file:
         $ref: "#/definitions/CreateFileRequestModel"
 
-    # Create collection item example
-    CreateCollectionItemExampleRequestModel:
-      type: object
-      required:
-        - file
-      properties:
-        file:
-          $ref: "#/definitions/CreateFileRequestModel"
+  # Get collection items
+  GetCollectionItemsResponseModel:
+    type: object
+    properties:
+      success:
+        type: boolean
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/CollectionItemResponseModel"
+      count:
+        type: integer
+
+  CollectionItemResponseModel:
+    type: object
+    properties:
+      id:
+        type: integer
+      collectionId:
+        type: integer
+      name:
+        type: string
+
+  # Create collection item example
+  CreateCollectionItemExampleRequestModel:
+    type: object
+    required:
+      - file
+    properties:
+      file:
+        $ref: "#/definitions/CreateFileRequestModel"
 
   # Common
   DefaultSuccessResponseModel:

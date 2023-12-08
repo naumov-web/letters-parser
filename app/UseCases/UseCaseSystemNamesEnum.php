@@ -27,6 +27,12 @@ final class UseCaseSystemNamesEnum
     public const CREATE_COLLECTION_ITEM = 'createCollectionItem';
 
     /**
+     * Use case "Get collection items"
+     * @var string
+     */
+    public const GET_COLLECTION_ITEMS = 'getCollectionItems';
+
+    /**
      * Use case "Create collection item example"
      * @var string
      */

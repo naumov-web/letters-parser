@@ -22,6 +22,7 @@ Route::prefix('/v1')
             Route::post('', 'CollectionController@create');
 
             Route::prefix('/{collectionId}/items')->group(function () {
+                Route::get('', 'CollectionItemController@index');
                 Route::post('', 'CollectionItemController@create');
                 Route::post(
                     '{collectionItemId}/examples',
@@ -29,9 +30,4 @@ Route::prefix('/v1')
                 );
             });
         });
-
-        Route::put(
-            '/file-storage/settings',
-            'FileStorageSettingsController@update'
-        );
     });

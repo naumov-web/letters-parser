@@ -2,6 +2,8 @@
 
 namespace App\Models\CollectionItem\Contracts;
 
+use App\Models\Base\DTO\IndexDTO;
+use App\Models\Base\DTO\ListDTO;
 use App\Models\CollectionItem\DTO\CollectionItemDTO;
 
 /**
@@ -26,4 +28,13 @@ interface IDatabaseRepository
      * @return bool
      */
     public function isItemExists(int $collectionId, string $name): bool;
+
+    /**
+     * Get collection items
+     *
+     * @param int $collectionId
+     * @param IndexDTO $dto
+     * @return ListDTO
+     */
+    public function index(int $collectionId, IndexDTO $dto): ListDTO;
 }
