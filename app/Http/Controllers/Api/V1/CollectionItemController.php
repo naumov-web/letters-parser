@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\BaseApiController;
+use App\Http\Requests\Api\V1\CollectionItem\CreateExampleRequest;
 use App\Http\Requests\Api\V1\CollectionItem\CreateRequest;
 use App\Models\Base\DTO\CreateFileDTO;
 use App\Models\CollectionItem\Exceptions\CollectionItemWithNameAlreadyExistsException;
 use App\UseCases\Base\Exceptions\UseCaseNotFoundException;
+use App\UseCases\CollectionItem\InputDTO\CreateCollectionItemExampleInputDTO;
 use App\UseCases\CollectionItem\InputDTO\CreateCollectionItemInputDTO;
 use App\UseCases\UseCaseSystemNamesEnum;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -61,6 +63,35 @@ final class CollectionItemController extends BaseApiController
         return response()->json([
             'success' => true,
             'message' => __('messages.collection_item_created_successfully')
+        ]);
+    }
+
+    /**
+     * Handle request to create collection item example
+     *
+     * @param int $collectionId
+     * @param int $collectionItemId
+     * @param CreateExampleRequest $request
+     * @return JsonResponse
+     * @throws BindingResolutionException
+     * @throws UseCaseNotFoundException
+     */
+    public function createExample(int $collectionId, int $collectionItemId, CreateExampleRequest $request): JsonResponse
+    {
+        $inputDto = new CreateCollectionItemExampleInputDTO();
+        $inputDto->collectionItemId = $collectionItemId;
+        $inputDto->file = new CreateFileDTO();
+        $inputDto->file->name = $request->file['name'];
+        $inputDto->file->mime = $request->file['mime'];
+        $inputDto->file->content = $request->file['content'];
+
+        $useCase = $this->useCaseFactory->createUseCase(UseCaseSystemNamesEnum::CREATE_COLLECTION_ITEM_EXAMPLE);
+        $useCase->setInputDTO($inputDto);
+        $useCase->execute();
+
+        return response()->json([
+            'success' => true,
+            'message' => __('messages.collection_item_example_created_successfully')
         ]);
     }
 }

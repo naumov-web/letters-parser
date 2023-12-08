@@ -17,7 +17,7 @@ interface IFileService
      * @param MorphDTO $ownerDto
      * @param CreateFileDTO $createFileDto
      * @param int $semanticTypeId
-     * @return void
+     * @return string
      */
-    public function create(MorphDTO $ownerDto, CreateFileDTO $createFileDto, int $semanticTypeId): void;
+    public function create(MorphDTO $ownerDto, CreateFileDTO $createFileDto, int $semanticTypeId): string;
 }

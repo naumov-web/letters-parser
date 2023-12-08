@@ -112,6 +112,45 @@ paths:
           schema:
             $ref: "#/definitions/ValidationErrorResponseModel"
 
+  /v1/collections/{collectionId}/items/{collectionItemId}/examples:
+    post:
+      tags:
+        - collection items
+      summary: Create example for collection item
+      description: Create example for specific collection item
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: collectionId
+          required: true
+          type: number
+        - in: path
+          name: collectionItemId
+          required: true
+          type: number
+        - name: "CreateCollectionItemExampleRequestBody"
+          in: body
+          description: "Request body for creation of example for collection item"
+          required: true
+          schema:
+            $ref: "#/definitions/CreateCollectionItemExampleRequestModel"
+      responses:
+        200:
+          description: "Successfull operation"
+          schema:
+            $ref: "#/definitions/DefaultSuccessResponseModel"
+        404:
+          description: "Not found error"
+          schema:
+            $ref: "#/definitions/NotFoundErrorResponseModel"
+        422:
+          description: "Validation error"
+          schema:
+            $ref: "#/definitions/ValidationErrorResponseModel"
+
 definitions:
 
   # Get collections
@@ -155,29 +194,14 @@ definitions:
       file:
         $ref: "#/definitions/CreateFileRequestModel"
 
-  # Update file storage settings
-  UpdateFileStorageSettingsRequestModel:
-    type: object
-    required:
-      - key
-      - secret
-      - region
-      - bucket
-      - url
-      - endpoint
-    properties:
-      key:
-        type: string
-      secret:
-        type: string
-      region:
-        type: string
-      bucket:
-        type: string
-      url:
-        type: string
-      endpoint:
-        type: string
+    # Create collection item example
+    CreateCollectionItemExampleRequestModel:
+      type: object
+      required:
+        - file
+      properties:
+        file:
+          $ref: "#/definitions/CreateFileRequestModel"
 
   # Common
   DefaultSuccessResponseModel:
@@ -204,6 +228,10 @@ definitions:
 
   CreateFileRequestModel:
     type: object
+    required:
+      - name
+      - mime
+      - content
     properties:
       name:
         type: string

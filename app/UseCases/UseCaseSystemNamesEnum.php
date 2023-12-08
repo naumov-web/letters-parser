@@ -25,4 +25,10 @@ final class UseCaseSystemNamesEnum
      * @var string
      */
     public const CREATE_COLLECTION_ITEM = 'createCollectionItem';
+
+    /**
+     * Use case "Create collection item example"
+     * @var string
+     */
+    public const CREATE_COLLECTION_ITEM_EXAMPLE = 'createCollectionItemExample';
 }
