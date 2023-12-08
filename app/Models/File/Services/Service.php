@@ -24,17 +24,19 @@ final class Service implements IFileService
     /**
      * @inheritDoc
      */
-    public function create(MorphDTO $ownerDto, CreateFileDTO $createFileDto, int $semanticTypeId): void
+    public function create(MorphDTO $ownerDto, CreateFileDTO $createFileDto, int $semanticTypeId): string
     {
         $fileDto = new FileDTO();
         $fileDto->ownerId = $ownerDto->ownerId;
-        $fileDto->ownerType = $ownerDto->ownerId;
+        $fileDto->ownerType = $ownerDto->ownerType;
         $fileDto->name = $createFileDto->name;
         $fileDto->mime = $createFileDto->mime;
         $fileDto->path = $this->storeFile($createFileDto);
         $fileDto->semanticTypeId = $semanticTypeId;
 
         $this->repository->create($fileDto);
+
+        return $fileDto->path;
     }
 
     /**

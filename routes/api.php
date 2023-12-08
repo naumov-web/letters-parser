@@ -23,6 +23,10 @@ Route::prefix('/v1')
 
             Route::prefix('/{collectionId}/items')->group(function () {
                 Route::post('', 'CollectionItemController@create');
+                Route::post(
+                    '{collectionItemId}/examples',
+                    'CollectionItemController@createExample'
+                );
             });
         });
 
